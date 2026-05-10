@@ -42,7 +42,7 @@ spec:
       containers:
         - name: legal-backend
           # TODO: Replace YOUR_DOCKERHUB_USERNAME with your Docker Hub username
-          image: YOUR_DOCKERHUB_USERNAME/legal-backend:latest
+          image: chithrakc9945/legal-backend:latest
           ports:
             - containerPort: 5000
           envFrom:

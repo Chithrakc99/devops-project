@@ -231,12 +231,12 @@ image: yourusername/legal-backend:latest
 docker login
 
 # Build and push backend
-docker build -t yourusername/legal-backend:latest -f backend/Dockerfile .
-docker push yourusername/legal-backend:latest
+docker build -t chithrakc9945/legal-backend:latest -f backend/Dockerfile .
+docker push chithrakc9945/legal-backend:latest
 
 # Build and push frontend
-docker build -t yourusername/legal-frontend:latest -f frontend/Dockerfile .
-docker push yourusername/legal-frontend:latest
+docker build -t chithrakc9945/legal-frontend:latest -f frontend/Dockerfile .
+docker push chithrakc9945/legal-frontend:latest
 ```
 
 ### Step 3 – Start Minikube

@@ -19,7 +19,7 @@ spec:
       containers:
         - name: legal-frontend
           # TODO: Replace YOUR_DOCKERHUB_USERNAME with your Docker Hub username
-          image: YOUR_DOCKERHUB_USERNAME/legal-frontend:latest
+          image: chithrakc9945/legal-frontend:latest
           ports:
             - containerPort: 80
           resources:
