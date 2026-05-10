@@ -11,7 +11,6 @@ pipeline {
         BACKEND_IMAGE  = "${params.DOCKERHUB_USERNAME}/legal-backend:${params.IMAGE_TAG}"
         FRONTEND_IMAGE = "${params.DOCKERHUB_USERNAME}/legal-frontend:${params.IMAGE_TAG}"
         NODE_ENV       = 'test'
-        KUBECONFIG     = 'C:\\ProgramData\\Jenkins\\.jenkins\\.kube\\config'
     }
 
     options {
@@ -154,12 +153,8 @@ pipeline {
         // ── Stage 10: Deploy to Kubernetes ────────────────────────────
         stage('Deploy to Kubernetes') {
             steps {
-                echo '🚀 Applying Kubernetes manifests...'
-                bat 'kubectl apply -f k8s/ --validate=false'
-                bat 'kubectl set image deployment/legal-backend legal-backend=%BACKEND_IMAGE% || echo skipping'
-                bat 'kubectl set image deployment/legal-frontend legal-frontend=%FRONTEND_IMAGE% || echo skipping'
-                bat 'kubectl rollout status deployment/legal-backend --timeout=120s || echo rollout pending'
-                bat 'kubectl rollout status deployment/legal-frontend --timeout=120s || echo rollout pending'
+                echo '⚠️ Kubernetes deployment skipped in CI pipeline.'
+                echo '✅ To deploy manually, run: kubectl apply -f k8s/ --validate=false'
             }
         }
     }
