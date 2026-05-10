@@ -162,6 +162,7 @@ pipeline {
                 bat 'kubectl rollout status deployment/legal-frontend --timeout=120s || echo rollout pending'
             }
         }
+    }
 
     post {
         success {
