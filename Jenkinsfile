@@ -11,6 +11,7 @@ pipeline {
         BACKEND_IMAGE  = "${params.DOCKERHUB_USERNAME}/legal-backend:${params.IMAGE_TAG}"
         FRONTEND_IMAGE = "${params.DOCKERHUB_USERNAME}/legal-frontend:${params.IMAGE_TAG}"
         NODE_ENV       = 'test'
+        KUBECONFIG     = 'C:\\ProgramData\\Jenkins\\.jenkins\\.kube\\config'
     }
 
     options {
