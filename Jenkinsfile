@@ -57,7 +57,7 @@ pipeline {
                     steps {
                         dir('backend') {
                             echo '🔍 Running ESLint on backend...'
-                            bat 'npm run lint || echo "Lint warnings found - continuing"'
+                            bat 'npm run lint || exit /b 0'
                         }
                     }
                 }
@@ -65,7 +65,7 @@ pipeline {
                     steps {
                         dir('frontend') {
                             echo '🔍 Running ESLint on frontend...'
-                            bat 'npm run lint || echo "Lint warnings found - continuing"'
+                            bat 'npm run lint || exit /b 0'
                         }
                     }
                 }
