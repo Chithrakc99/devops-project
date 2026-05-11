@@ -33,14 +33,11 @@ function Login() {
         {/* Left Hero */}
         <div className="auth-hero">
           <div className="auth-hero-icon">⚖️</div>
-          <h2>LegalAdvisor Pro</h2>
-          <p>Your intelligent legal advisory platform powered by AI-driven case analysis and expert lawyer connections.</p>
+          <h2>Kanoon Connect</h2>
+          <p>An intelligent legal advisory platform </p>
           <div className="auth-features">
             {[
-              'Smart legal situation analysis using RAG',
-              'Role-based access for users & lawyers',
-              'Appointment booking with quotes',
-              'Indian law reference database',
+              
             ].map((f, i) => (
               <div key={i} className="auth-feature-item">
                 <div className="auth-feature-dot" />

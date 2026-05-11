@@ -34,14 +34,11 @@ function Register() {
         {/* Left Hero */}
         <div className="auth-hero">
           <div className="auth-hero-icon">🏛️</div>
-          <h2>Join LegalAdvisor</h2>
+          <h2>Join KanoonConnect</h2>
           <p>Register as a client seeking legal help or as a lawyer offering your expertise to those in need.</p>
           <div className="auth-features">
             {[
-              'Users: Get AI-powered legal suggestions',
-              'Users: Book appointments with lawyers',
-              'Lawyers: Manage your client appointments',
-              'Lawyers: Set quotes and schedule meetings',
+              
             ].map((f, i) => (
               <div key={i} className="auth-feature-item">
                 <div className="auth-feature-dot" style={{ background: i < 2 ? '#38bdf8' : '#4ade80' }} />
