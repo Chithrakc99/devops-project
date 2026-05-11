@@ -1,0 +1,42 @@
+backend running
+
+cd backend
+npm start
+
+frontend running
+
+cd frontend
+npm run dev
+
+docker pushing images
+
+docker login
+docker build -t chithrakc9945/legal-backend:latest -f backend/Dockerfile .
+docker push chithrakc9945/legal-backend:latest
+
+docker build -t chithrakc9945/legal-frontend:latest -f frontend/Dockerfile .
+docker push chithrakc9945/legal-frontend:latest
+
+
+minikube start --driver=docker
+kubectl apply -f k8s/
+kubectl get pods
+
+
+unit testing
+npm run test:unit
+
+integration testing
+npm run test:integration
+
+covergae and sonarcube
+npm run test:coverage
+
+docker stop sonarqube
+docker rm sonarqube
+docker run -d --name sonarqube -p 9001:9000 sonarqube:community
+set "JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot" && npx sonar-scanner -Dsonar.projectKey=kanoonconnect -Dsonar.sources=backend/routes,backend/data -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_27611445d9f8b28ba89ddd0828283463fcd35d7f
+sonar-scanner.bat -D"sonar.projectKey=kanoonconnect" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_27611445d9f8b28ba89ddd0828283463fcd35d7f"
+
+docker-compose down
+docker-compose up --build

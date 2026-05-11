@@ -1,8 +1,7 @@
-version: '3.8'
+
 
 services:
 
-  # ── MongoDB ──────────────────────────────────────────────────────────
   mongodb:
     image: mongo:7-jammy
     container_name: legal_mongo
@@ -13,14 +12,7 @@ services:
       - mongo-data:/data/db
     networks:
       - legal-network
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 20s
-      timeout: 10s
-      retries: 5
-      start_period: 30s
 
-  # ── Backend ───────────────────────────────────────────────────────────
   backend:
     build:
       context: .
@@ -30,8 +22,7 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      mongodb:
-        condition: service_healthy
+      - mongodb
     environment:
       - MONGO_URI=mongodb://mongodb:27017/devops_legal
       - JWT_SECRET=supersecretdevopskey_change_in_production
@@ -39,14 +30,7 @@ services:
       - NODE_ENV=production
     networks:
       - legal-network
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:5000/health"]
-      interval: 20s
-      timeout: 10s
-      retries: 5
-      start_period: 20s
 
-  # ── Frontend ──────────────────────────────────────────────────────────
   frontend:
     build:
       context: .
@@ -54,16 +38,58 @@ services:
     container_name: legal_frontend
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "3000:80"
     depends_on:
-      backend:
-        condition: service_healthy
+      - backend
+    networks:
+      - legal-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - legal-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - legal-network
+
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_logs:/opt/sonarqube/logs
     networks:
       - legal-network
 
 volumes:
   mongo-data:
-    driver: local
+  prometheus-data:
+  grafana-data:
+  sonarqube_data:
+  sonarqube_logs:
 
 networks:
   legal-network:
