@@ -1,4 +1,4 @@
-# ⚖️ LegalAdvisor Pro
+# ⚖️ KanoonConnect
 
 A full-stack legal advisory platform with **AI-powered RAG-based legal suggestions**, role-based authentication (User / Lawyer), appointment booking system, and a complete DevOps pipeline (Docker, Kubernetes, Jenkins CI/CD, Ansible).
 
